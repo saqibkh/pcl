@@ -1,0 +1,19 @@
+commit 2dfae60789616bae66518ce597afd9e3f0fe6336
+Author: chunibyo-wly <chunibyo.wly@gmail.com>
+Date:   Mon Jul 13 22:36:03 2026 +0800
+
+    [FIX] gpu approx nearest unit test
+
+diff --git a/test/gpu/octree/test_approx_nearest.cpp b/test/gpu/octree/test_approx_nearest.cpp
+index f6f4c0a50..46c951d6e 100644
+--- a/test/gpu/octree/test_approx_nearest.cpp
++++ b/test/gpu/octree/test_approx_nearest.cpp
+@@ -121,7 +121,7 @@ TEST(PCL_OctreeGPU, approxNearesSearch)
+                                                   pcl::squaredEuclideanDistance(coords[7], queries[2]) };
+ 
+   for (size_t i = 0; i < queries.size(); ++i) {
+-    ASSERT_EQ(dists_pcl[i], dists_gpu[i]);
++    ASSERT_FLOAT_EQ(dists_pcl[i], dists_gpu[i]);
+     ASSERT_NEAR(dists_gpu[i], dists_device_downloaded[i], 0.001);
+     ASSERT_NEAR(dists_device_downloaded[i], expected_sqr_dists[i], 0.001);
+   }
